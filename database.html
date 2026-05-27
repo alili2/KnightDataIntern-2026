@@ -60,27 +60,27 @@
           <tr><td><span class="mono">c_fifoix</span></td><td>FIFO inventory index — live bin quantities per part</td><td><span class="tag-good">use this</span> SUM(qty) grouped by partno = reliable QOH</td></tr>
           <tr><td><span class="mono">Fifoix-Bins</span></td><td>Bin-level detail within the FIFO inventory index</td><td>more granular than c_fifoix use this when you need bin location breakdown</td></tr>
           <tr><td><span class="mono">Fifoix Pieces</span></td><td>Piece/serial level detail within FIFO inventory</td><td></td></tr>
-          <tr><td><span class="mono">Part Pick Layers</span></td><td>Tracks which FIFO inventory layers were consumed by a work order pick</td></tr>
+          <tr><td><span class="mono">Part Pick Layers</span></td><td>Tracks which FIFO inventory layers were consumed by a work order pick</td><td></td></tr>
           <tr><td><span class="mono">Part Pick Pieces</span></td><td>Piece-level detail for part picks</td><td><span class="tag-warn">undocumented</span></td></tr>
           <tr><td><span class="mono">Part Revision</span></td><td>Tracks revision history for parts</td><td>important for aerospace compliance ie. parts have revision levels (we rarely use this table)</td></tr>
-          <tr><td><span class="mono">Part Revision Definitions</span></td><td>Lookup table defining what each revision level means</td></tr>
-          <tr><td><span class="mono">Part Revision Map</span></td><td>Maps revisions to routing/BOM configurations</td></tr>
-          <tr><td><span class="mono">Part Revision Map Operations</span></td><td>Operations associated with a part revision map</td></tr>
-          <tr><td><span class="mono">Part Revision Map Operation Instructions</span></td><td>Step-level instructions for revision map operations</td></tr>
-          <tr><td><span class="mono">Part Request</span></td><td>Requests for parts (likely material/shortage requests)</td></tr>
-          <tr><td><span class="mono">Part Request Reason</span></td><td>Lookup table of reasons for part requests</td></tr>
-          <tr><td><span class="mono">Part Spec Rules</span></td><td>Rules governing part specifications</td></tr>
-          <tr><td><span class="mono">Part Specs</span></td><td>Specifications associated with parts</td></tr>
-          <tr><td><span class="mono">Allocation</span></td><td>Inventory allocations — parts reserved for specific orders or WOs</td>></tr>
+          <tr><td><span class="mono">Part Revision Definitions</span></td><td>Lookup table defining what each revision level means</td><td></td></tr>
+          <tr><td><span class="mono">Part Revision Map</span></td><td>Maps revisions to routing/BOM configurations</td><td></td></tr>
+          <tr><td><span class="mono">Part Revision Map Operations</span></td><td>Operations associated with a part revision map</td><td></td></tr>
+          <tr><td><span class="mono">Part Revision Map Operation Instructions</span></td><td>Step-level instructions for revision map operations</td><td></td></tr>
+          <tr><td><span class="mono">Part Request</span></td><td>Requests for parts (likely material/shortage requests)</td><td></td></tr>
+          <tr><td><span class="mono">Part Request Reason</span></td><td>Lookup table of reasons for part requests</td><td></td></tr>
+          <tr><td><span class="mono">Part Spec Rules</span></td><td>Rules governing part specifications</td><td></td></tr>
+          <tr><td><span class="mono">Part Specs</span></td><td>Specifications associated with parts</td><td></td></tr>
+          <tr><td><span class="mono">Allocation</span></td><td>Inventory allocations — parts reserved for specific orders or WOs</td><td></td></tr>
           <tr><td><span class="mono">Cycle Counts</span></td><td>Physical inventory count events</td><td>used for inventory accuracy audits</td></tr>
-          <tr><td><span class="mono">Cycle Count Parts</span></td><td>Parts included in each cycle count</td></tr>
-          <tr><td><span class="mono">Relieve Inventory Log</span></td><td>Log of inventory relief events (when stock is consumed/removed)</td></tr>
-          <tr><td><span class="mono">Inv</span></td><td>General inventory table</td><td><span class="tag-warn">undocumented</span> exact scope unclea</td></tr>
-          <tr><td><span class="mono">Inv Shortage Reason</span></td><td>Lookup table of reasons for inventory shortages</td></tr>
-          <tr><td><span class="mono">Locations</span></td><td>Physical locations/bins within the warehouse</td></tr>
+          <tr><td><span class="mono">Cycle Count Parts</span></td><td>Parts included in each cycle count</td><td></td></tr>
+          <tr><td><span class="mono">Relieve Inventory Log</span></td><td>Log of inventory relief events (when stock is consumed/removed)</td><td></td></tr>
+          <tr><td><span class="mono">Inv</span></td><td>General inventory table</td><td><span class="tag-warn">undocumented</span> exact scope unclear</td></tr>
+          <tr><td><span class="mono">Inv Shortage Reason</span></td><td>Lookup table of reasons for inventory shortages</td><td></td></tr>
+          <tr><td><span class="mono">Locations</span></td><td>Physical locations/bins within the warehouse</td><td></td></tr>
           <tr><td><span class="mono">Uoms</span></td><td>Units of measure (each, ft, lb, etc.)</td><td>lookup/reference table</td></tr>
-          <tr><td><span class="mono">Cross Parts</span></td><td>Alternate/substitute parts that can be used interchangeably</td></tr>
-          <tr><td><span class="mono">Cross Part Types</span></td><td>Categories of part substitution relationships</td></tr>
+          <tr><td><span class="mono">Cross Parts</span></td><td>Alternate/substitute parts that can be used interchangeably</td><td></td></tr>
+          <tr><td><span class="mono">Cross Part Types</span></td><td>Categories of part substitution relationships</td><td></td></tr>
           <tr><td><span class="mono">Prcs</span></td><td>Part class/category codes — used to group parts by type (e.g. PCD = placard parts)</td><td>important filter for procurement spend reports</td></tr>
         </tbody>
       </table>
@@ -89,9 +89,9 @@
 
   <!-- PURCHASING -->
   <div class="section" id="purchasing">
-    <div class="section-label">🛒 purchasing & POs</div>
+    <div class="section-label">Purchasing & POs</div>
     <div class="callout warn">
-      <strong>always exclude vendor 712</strong> from any procurement or spend analysis — this excludes Knight Aerospace itself as an outside vendor. <span class="mono">WHERE vendor_id != 712</span>
+      <strong>always exclude vendor 712</strong> from any procurement or spend analysis: this excludes Knight Aerospace itself as an outside vendor. <span class="mono">WHERE vendor_id != 712</span>
     </div>
     <div class="table-wrap">
       <table class="data-table">
@@ -99,13 +99,13 @@
         <tbody>
           <tr><td><span class="mono">Pos</span></td><td>Purchase order headers — one row per PO</td><td><span class="tag-info">core table</span></td></tr>
           <tr><td><span class="mono">Po Lines</span></td><td>Line items on each PO — one row per part ordered</td><td>join to Pos on po_id</td></tr>
-          <tr><td><span class="mono">Po Line Receipts</span></td><td>Records when PO lines were received into inventory</td><tr>
+          <tr><td><span class="mono">Po Line Receipts</span></td><td>Records when PO lines were received into inventory</td><td></td><tr>
           <tr><td><span class="mono">Vendors</span></td><td>Vendor master list</td><td>almost always exclude id=712</td></tr>
-          <tr><td><span class="mono">Pquotes</span></td><td>Purchase quotes from vendors</td></tr>
+          <tr><td><span class="mono">Pquotes</span></td><td>Purchase quotes from vendors</td><td></td></tr>
           <tr><td><span class="mono">Pquote Lines</span></td><td>Line items on each purchase quote</td><td>join to Pquotes on pquote_id</td></tr>
           <tr><td><span class="mono">Vouchers</span></td><td>AP vouchers: records of what's owed to vendors after receiving</td><td>used in AP/finance reporting</td></tr>
-          <tr><td><span class="mono">Debit Memos</span></td><td>Credits issued back to Knight from vendors (returns, overcharges)</td></tr>
-          <tr><td><span class="mono">Debit Memo Payments</span></td><td>Payment records tied to debit memos</td></tr>
+          <tr><td><span class="mono">Debit Memos</span></td><td>Credits issued back to Knight from vendors (returns, overcharges)</td><td></td></tr>
+          <tr><td><span class="mono">Debit Memo Payments</span></td><td>Payment records tied to debit memos</td><td></td></tr>
           <tr><td><span class="mono">Incoming Inspections</span></td><td>Inspection records for received parts before they enter inventory</td><td>quality link between receipt and inventory</td></tr>
           <tr><td><span class="mono">Fob Codes</span></td><td>Freight On Board shipping terms lookup</td><td>reference/lookup table</td></tr>
           <tr><td><span class="mono">Skid Head</span></td><td>Header for a skid/pallet shipment received</td><td><span class="tag-warn">undocumented</span>  we don't really use this table</td></tr>
@@ -124,23 +124,23 @@
         <tbody>
           <tr><td><span class="mono">Ordhead</span></td><td>Sales order header — one row per customer order</td><td><span class="tag-info">core table</span></td></tr>
           <tr><td><span class="mono">Ordline</span></td><td>Line items on each sales order</td><td>join to Ordhead on order id</td></tr>
-          <tr><td><span class="mono">Ordline Comment</span></td><td>Comments/notes attached to order lines</td></tr>
-          <tr><td><span class="mono">Ordline Map</span></td><td>Maps order lines to work orders or routing</td></tr>
+          <tr><td><span class="mono">Ordline Comment</span></td><td>Comments/notes attached to order lines</td><td></td></tr>
+          <tr><td><span class="mono">Ordline Map</span></td><td>Maps order lines to work orders or routing</td><td></td></tr>
           <tr><td><span class="mono">Ordline Map Operations</span></td><td>Operations defined within an order line map</td><td><span class="tag-warn">undocumented</span> Not used often</td></tr>
           <tr><td><span class="mono">Ordline Map Operation Instructions</span></td><td>Step-level instructions for order line map operations</td><td><span class="tag-warn">undocumented</span> not used often</td></tr>
           <tr><td><span class="mono">Ordline Schedule</span></td><td>Scheduled dates/milestones for order lines</td><td><span class="tag-warn">undocumented</span>not used</td></tr>
           <tr><td><span class="mono">Ordline Status</span></td><td>Current status of each order line</td><td>useful for open order reports</td></tr>
-          <tr><td><span class="mono">Ordline Status Trail</span></td><td>History of status changes for order lines</td><td>audit trail - lead time analysis</td></tr>
-          <tr><td><span class="mono">Ordline Work</span></td><td>Work associated with specific order lines</td></tr>
-          <tr><td><span class="mono">Order Links</span></td><td>Links between related orders (e.g. parent/child relationships)</td></tr>
-          <tr><td><span class="mono">Order Tracking</span></td><td>Shipping/tracking info for outgoing orders</td></tr>
-          <tr><td><span class="mono">Bookings</span></td><td>Records of booked/confirmed orders</td></tr>
+          <tr><td><span class="mono">Ordline Status Trail</span></td><td>History of status changes for order lines</td><td>audit trail</td></tr>
+          <tr><td><span class="mono">Ordline Work</span></td><td>Work associated with specific order lines</td><td></td></tr>
+          <tr><td><span class="mono">Order Links</span></td><td>Links between related orders (e.g. parent/child relationships)</td><td></td></tr>
+          <tr><td><span class="mono">Order Tracking</span></td><td>Shipping/tracking info for outgoing orders</td><td></td></tr>
+          <tr><td><span class="mono">Bookings</span></td><td>Records of booked/confirmed orders</td><td></td></tr>
           <tr><td><span class="mono">Invoices</span></td><td>Customer invoices generated from shipped orders</td><td>key for AR aging reports</td></tr>
           <tr><td><span class="mono">Invoice Lines</span></td><td>Line items on each customer invoice</td><td>join to Invoices on invoice id</td></tr>
           <tr><td><span class="mono">Invoice Tax</span></td><td>Tax amounts applied to invoices</td><td>reference/lookup</td></tr>
-          <tr><td><span class="mono">Invoices As Used</span></td><td>Invoices tied to "as used" billing (billed after actual use)</td></tr>
-          <tr><td><span class="mono">Unapplied Cash</span></td><td>Cash received that hasn't yet been applied to an invoice</td></tr>
-          <tr><td><span class="mono">Lois</span></td><td>Letters of Intent — early stage customer commitments before a formal order</td></tr>
+          <tr><td><span class="mono">Invoices As Used</span></td><td>Invoices tied to "as used" billing (billed after actual use)</td><td></td></tr>
+          <tr><td><span class="mono">Unapplied Cash</span></td><td>Cash received that hasn't yet been applied to an invoice</td><td></td></tr>
+          <tr><td><span class="mono">Lois</span></td><td>Letters of Intent — early stage customer commitments before a formal order</td><td></td></tr>
         </tbody>
       </table>
     </div>
@@ -161,7 +161,7 @@
           <tr><td><span class="mono">Workcenters</span></td><td>Physical work areas/machines where operations are performed</td><td>not used often</td></tr>
           <tr><td><span class="mono">Capacity</span></td><td>Capacity defined for each workcenter</td><td>not used often</td></tr>
           <tr><td><span class="mono">Production Status Types</span></td><td>Lookup table of possible production statuses</td><td>reference table</td></tr>
-          <tr><td><span class="mono">Projects</span></td><td>Projects that work orders or orders can be tied to</td></tr>
+          <tr><td><span class="mono">Projects</span></td><td>Projects that work orders or orders can be tied to</td><td></td></tr>
           <tr><td><span class="mono">Ecos</span></td><td>Engineering Change Orders — formal changes to parts or processes</td><td>important for compliance in aerospace manufacturing</td></tr>
           <tr><td><span class="mono">Eco Types</span></td><td>Categories of engineering change orders</td><td>lookup/reference table</td></tr>
         </tbody>
@@ -179,22 +179,22 @@
           <tr><td><span class="mono">Ncrs</span></td><td>Nonconformance Reports — records of parts/processes that don't meet spec</td><td><span class="tag-info">core quality table</span></td></tr>
           <tr><td><span class="mono">Ncr Types</span></td><td>Categories of nonconformances</td><td>lookup/reference table</td></tr>
           <tr><td><span class="mono">Ncr Dispositions</span></td><td>What happened to a nonconforming part (scrap, rework, use-as-is)</td><td></td></tr>
-          <tr><td><span class="mono">Inspections</span></td><td>In-process inspection records during production</td></tr>
+          <tr><td><span class="mono">Inspections</span></td><td>In-process inspection records during production</td><td></td></tr>
           <tr><td><span class="mono">Inspection Types</span></td><td>Types/categories of inspections</td><td>lookup/reference table</td></tr>
           <tr><td><span class="mono">Inspection Failures</span></td><td>Records of failed inspections</td><td></td></tr>
           <tr><td><span class="mono">Inspection Failures Def</span></td><td>Definitions/codes for inspection failure types</td><td>lookup/reference table</td></tr>
-          <tr><td><span class="mono">Inspection Serials</span></td><td>Serial numbers inspected during inspection events</td></tr>
+          <tr><td><span class="mono">Inspection Serials</span></td><td>Serial numbers inspected during inspection events</td><td></td></tr>
           <tr><td><span class="mono">Incoming Inspections</span></td><td>Inspection of received parts before entering inventory</td><td>links purchasing to inventory</td></tr>
           <tr><td><span class="mono">Cars</span></td><td>Corrective Action Requests — formal responses to quality issues</td><td>typically triggered by an NCR</td></tr>
           <tr><td><span class="mono">Car Types</span></td><td>Categories of corrective actions</td><td>lookup/reference table</td></tr>
-          <tr><td><span class="mono">Car Actions</span></td><td>Specific actions taken as part of a CAR</td></tr>
+          <tr><td><span class="mono">Car Actions</span></td><td>Specific actions taken as part of a CAR</td><td></td></tr>
           <tr><td><span class="mono">Car Action Types</span></td><td>Types of corrective actions available</td><td>lookup/reference table</td></tr>
-          <tr><td><span class="mono">Car Action Assignments</span></td><td>Who is assigned to each corrective action</td></tr>
+          <tr><td><span class="mono">Car Action Assignments</span></td><td>Who is assigned to each corrective action</td><td></td></tr>
           <tr><td><span class="mono">Car Root Causes</span></td><td>Root causes identified for a CAR</td><td>used in quality root cause analysis</td></tr>
           <tr><td><span class="mono">Car Root Cause Types</span></td><td>Categories of root causes</td><td>lookup/reference table</td></tr>
-          <tr><td><span class="mono">Car Resolutions</span></td><td>Resolution records for closed CARs</td></tr>
+          <tr><td><span class="mono">Car Resolutions</span></td><td>Resolution records for closed CARs</td><td></td></tr>
           <tr><td><span class="mono">Car Sources</span></td><td>Where the CAR originated from (customer, internal, audit, etc.)</td><td>lookup/reference table</td></tr>
-          <tr><td><span class="mono">Car Whys</span></td><td>5-Why analysis entries tied to a CAR</td></tr>
+          <tr><td><span class="mono">Car Whys</span></td><td>5-Why analysis entries tied to a CAR</td><td></td></tr>
         </tbody>
       </table>
     </div>
@@ -210,8 +210,8 @@
           <tr><td><span class="mono">Gl Accounts</span></td><td>General ledger chart of accounts</td><td>maps financial transactions to accounting categories</td></tr>
           <tr><td><span class="mono">Gl Account Types</span></td><td>Types of GL accounts (asset, liability, revenue, expense)</td><td>lookup/reference table</td></tr>
           <tr><td><span class="mono">Gl Entries</span></td><td>Individual GL journal entries</td><td>core finance table. Every financial transaction creates a GL entry</td></tr>
-          <tr><td><span class="mono">Gl Entry Splits</span></td><td>Split portions of GL entries across multiple accounts</td></tr>
-          <tr><td><span class="mono">Cost Centers</span></td><td>Departments or areas costs are tracked against</td><td></td></tr>
+          <tr><td><span class="mono">Gl Entry Splits</span></td><td>Split portions of GL entries across multiple accounts</td><td></td></tr>
+          <tr><td><span class="mono">Cost Centers</span></td><td>Departments or areas costs are tracked against</td><td></td><td></td></tr>
           <tr><td><span class="mono">Currencies</span></td><td>Currency definitions and exchange rates</td><td><span class="tag-warn">undocumented</span> not used often</td></tr>
           <tr><td><span class="mono">C 9tax</span></td><td>Tax configuration table</td><td><span class="tag-warn">undocumented</span> not used often</td></tr>
           <tr><td><span class="mono">C 9terms</span></td><td>Payment terms definitions (Net 30, Net 60, etc.)</td><td>lookup/reference table</td></tr>
@@ -233,11 +233,11 @@
         <thead><tr><th>Table</th><th>What It Is</th><th>Notes</th></tr></thead>
         <tbody>
           <tr><td><span class="mono">Customers</span></td><td>Customer master list</td><td><span class="tag-info">core table</span> join to orders/invoices on customer id</td></tr>
-          <tr><td><span class="mono">Customer Address</span></td><td>Shipping/billing addresses for customers</td></tr>
-          <tr><td><span class="mono">Customer Association</span></td><td>Links between customers and other entities</td></tr>
+          <tr><td><span class="mono">Customer Address</span></td><td>Shipping/billing addresses for customers</td><td></td></tr>
+          <tr><td><span class="mono">Customer Association</span></td><td>Links between customers and other entities</td><td></td></tr>
           <tr><td><span class="mono">Customer Association Types</span></td><td>Types of customer associations</td><td>lookup/reference table</td></tr>
-          <tr><td><span class="mono">Customer Association User Types</span></td><td>User-level types within customer associations</td></tr>
-          <tr><td><span class="mono">Contacts</span></td><td>Individual contacts (people) associated with customers or vendors</td></tr>
+          <tr><td><span class="mono">Customer Association User Types</span></td><td>User-level types within customer associations</td><td></td></tr>
+          <tr><td><span class="mono">Contacts</span></td><td>Individual contacts (people) associated with customers or vendors</td><td></td></tr>
           <tr><td><span class="mono">Opportunities</span></td><td>Sales opportunities / potential new business (CRM)</td><td>part of Cetec's CRM module</td></tr>
           <tr><td><span class="mono">Opportunity Types</span></td><td>Categories of sales opportunities</td><td>lookup/reference table</td></tr>
           <tr><td><span class="mono">Opportunity Pipelines</span></td><td>Sales pipeline stages for tracking opportunity progress</td><td><span class="tag-warn">undocumented</span> — add notes here</td></tr>
@@ -258,14 +258,14 @@
         <tbody>
           <tr><td><span class="mono">Quotes</span></td><td>Customer quote headers — price quotes sent to customers before an order</td><td>precedes Ordhead in the sales flow</td></tr>
           <tr><td><span class="mono">Quote Lines</span></td><td>Line items on each customer quote</td><td>join to Quotes on quote id</td></tr>
-          <tr><td><span class="mono">Quote Line Qty Breaks</span></td><td>Quantity-based pricing tiers on quote lines</td></tr>
-          <tr><td><span class="mono">Quote Association</span></td><td>Links quotes to other records (customers, opportunities)</td></tr>
+          <tr><td><span class="mono">Quote Line Qty Breaks</span></td><td>Quantity-based pricing tiers on quote lines</td><td></td></tr>
+          <tr><td><span class="mono">Quote Association</span></td><td>Links quotes to other records (customers, opportunities)</td><td></td></tr>
           <tr><td><span class="mono">Bom Header</span></td><td>Bill of Materials header — defines what goes into making a part</td><td><span class="tag-info">core table</span> for understanding part composition</td></tr>
-          <tr><td><span class="mono">Bom Order</span></td><td>BOM as it applies to a specific order or work order</td></tr>
-          <tr><td><span class="mono">Bom Quote Headers</span></td><td>BOM used in the context of a customer quote</td></tr>
-          <tr><td><span class="mono">Bom Quote Components</span></td><td>Component parts within a BOM quote</td></tr>
-          <tr><td><span class="mono">Bom Quote Component Qty Breaks</span></td><td>Quantity pricing tiers for BOM quote components</td></tr>
-          <tr><td><span class="mono">Bom Quote Charges</span></td><td>Additional charges defined in a BOM quote</td></tr>
+          <tr><td><span class="mono">Bom Order</span></td><td>BOM as it applies to a specific order or work order</td><td></td></tr>
+          <tr><td><span class="mono">Bom Quote Headers</span></td><td>BOM used in the context of a customer quote</td><td></td></tr>
+          <tr><td><span class="mono">Bom Quote Components</span></td><td>Component parts within a BOM quote</td><td></td></tr>
+          <tr><td><span class="mono">Bom Quote Component Qty Breaks</span></td><td>Quantity pricing tiers for BOM quote components</td><td></td></tr>
+          <tr><td><span class="mono">Bom Quote Charges</span></td><td>Additional charges defined in a BOM quote</td><td></td></tr>
         </tbody>
       </table>
     </div>
@@ -298,44 +298,21 @@
         <tbody>
           <tr><td><span class="mono">Role</span></td><td>User roles defined in the system</td><td>used for access control</td></tr>
           <tr><td><span class="mono">User Role</span></td><td>Maps users to their assigned roles</td><td>join to Role on role id</td></tr>
-          <tr><td><span class="mono">Documents</span></td><td>Attached documents/files linked to records in the system</td></tr>
-          <tr><td><span class="mono">Custom Documents</span></td><td>Custom document templates</td></tr>
-          <tr><td><span class="mono">Custom Form Response</span></td><td>Responses collected via custom forms in Cetec</td></tr>
-          <tr><td><span class="mono">Custom Form Attachment</span></td><td>Files attached to custom form responses</td></tr>
+          <tr><td><span class="mono">Documents</span></td><td>Attached documents/files linked to records in the system</td><td></td></tr>
+          <tr><td><span class="mono">Custom Documents</span></td><td>Custom document templates</td><td></td></tr>
+          <tr><td><span class="mono">Custom Form Response</span></td><td>Responses collected via custom forms in Cetec</td><td></td></tr>
+          <tr><td><span class="mono">Custom Form Attachment</span></td><td>Files attached to custom form responses</td><td></td></tr>
           <tr><td><span class="mono">Notes</span></td><td>Free-text notes attached to various records</td><td>we've used these for AR aging note matching, tricky to join correctly</td></tr>
           <tr><td><span class="mono">Bookmarks</span></td><td>Saved bookmarks within the Cetec UI</td><td>probably not useful</td></tr>
           <tr><td><span class="mono">Notifier Log</span></td><td>Log of system notifications sent</td><td>probably not useful</td></tr>
           <tr><td><span class="mono">External Api Log</span></td><td>Log of external API calls made to/from Cetec</td><td>could be useful for debugging integration issues</td></tr>
-          <tr><td><span class="mono">Workflow Steps</span></td><td>Steps defined in Cetec workflow automations</td></tr>
+          <tr><td><span class="mono">Workflow Steps</span></td><td>Steps defined in Cetec workflow automations</td><td></td></tr>
           <tr><td><span class="mono">Bonus Columns</span></td><td>Custom/extra columns added to records</td><td><span class="tag-warn">undocumented</span> unknown</td></tr>
           <tr><td><span class="mono">Dimension Storage Types</span></td><td>Types of physical storage dimensions</td><td>lookup/reference table</td></tr>
-          <tr><td><span class="mono">Tools</span></td><td>Tools/equipment tracked in the system</td></tr>
-          <tr><td><span class="mono">C Busins</span></td><td>Business/company config table</td></tr>
-          <tr><td><span class="mono">C B1slsa</span></td><td>Unknown system config table</td></tr>
-          <tr><td><span class="mono">C B1slsa Pieces</span></td><td>Unknown system config table</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- TO DOCUMENT -->
-  <div class="section" id="todo">
-    <div class="section-label">🔍 Theo's audit — priority tables to explore</div>
-    <div class="callout navy">
-      these are the tables most likely to have useful data that we haven't fully mapped yet. start here when doing your database audit — explore the columns, check for nulls, and document what you find above.
-    </div>
-    <div class="table-wrap">
-      <table class="data-table">
-        <thead><tr><th>Table</th><th>Why It Matters</th><th>Priority</th></tr></thead>
-        <tbody>
-          <tr><td><span class="mono">Workorder Links</span></td><td>Might help solve the WO→PO linking problem</td><td><span class="tag-info">high</span></td></tr>
-          <tr><td><span class="mono">Ordline Status / Status Trail</span></td><td>Key for lead time and delivery analysis</td><td><span class="tag-info">high</span></td></tr>
-          <tr><td><span class="mono">Ecos</span></td><td>Engineering changes — important for compliance reporting</td><td><span class="tag-info">high</span></td></tr>
-          <tr><td><span class="mono">Notes</span></td><td>We've hit join issues with this table before — needs mapping</td><td><span class="tag-info">high</span></td></tr>
-          <tr><td><span class="mono">Allocation</span></td><td>Understanding how parts get reserved could unlock new reports</td><td><span class="tag-warn">medium</span></td></tr>
-          <tr><td><span class="mono">Forecasts / Forecast Components</span></td><td>If we can tie forecasts to actual orders, useful for planning reports</td><td><span class="tag-warn">medium</span></td></tr>
-          <tr><td><span class="mono">Projects</span></td><td>Unknown if we use this — worth checking</td><td><span class="tag-warn">medium</span></td></tr>
-          <tr><td><span class="mono">External Api Log</span></td><td>Could help us understand what integrations Cetec already has</td><td><span class="tag-warn">medium</span></td></tr>
+          <tr><td><span class="mono">Tools</span></td><td>Tools/equipment tracked in the system</td><td></td></tr>
+          <tr><td><span class="mono">C Busins</span></td><td>Business/company config table</td><td></td></tr>
+          <tr><td><span class="mono">C B1slsa</span></td><td>Unknown system config table</td><td></td></tr>
+          <tr><td><span class="mono">C B1slsa Pieces</span></td><td>Unknown system config table</td><td></td></tr>
         </tbody>
       </table>
     </div>
