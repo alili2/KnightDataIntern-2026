@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Knight Data Intern 2026 · Database Guide</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">KnightDataIntern-2026</div>
+  <a href="index.html">🏠 Home</a>
+  <a href="database.html" class="active">🗄️ Database Guide</a>
+  <a href="metabase.html">📊 Metabase 101</a>
+  <a href="cetec.html">⚙️ Cetec ERP</a>
+</nav>
+
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-tag">Cetec ERP · MySQL Database</div>
+    <h1>database <em>guide</em></h1>
+    <p>the tables you'll actually be working with, what they mean, and what to watch out for. this is a living document — part of your job this summer is to fill in what's missing.</p>
+  </div>
+
+  <div class="callout warn">
+    <strong>heads up:</strong> Cetec's database has a lot of columns with misleading names, cached values, and nulls. don't trust a column just because it exists. when in doubt, ask Aliya.
+  </div>
+
+  <!-- INVENTORY -->
+  <div class="section">
+    <div class="section-label">inventory & parts</div>
+
+    <p style="font-size:14px; color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">These tables track parts, their quantities on hand, and bin locations. The most common source of confusion is <span class="mono">qoh_cache</span> vs <span class="mono">c_fifoix</span> — read the callout below carefully.</p>
+
+    <div class="callout warn">
+      <strong>critical:</strong> always use <span class="mono">c_fifoix</span> summed bin quantities for inventory — NOT <span class="mono">qoh_cache</span>. <span class="mono">qoh_cache</span> is a cached value that lags behind real data and will give you wrong numbers. this has burned us before.
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Table</th><th>What It Is</th><th>Key Columns</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="mono">partmaster</span></td>
+            <td>Master list of every part in the system</td>
+            <td><span class="mono">partno</span>, <span class="mono">description</span>, <span class="mono">prc</span></td>
+            <td><span class="tag-info">core table</span> — always your starting point for part lookups</td>
+          </tr>
+          <tr>
+            <td><span class="mono">c_fifoix</span></td>
+            <td>FIFO inventory index — live bin quantities</td>
+            <td><span class="mono">partno</span>, <span class="mono">qty</span>, <span class="mono">bin</span></td>
+            <td><span class="tag-good">use this</span> — SUM(qty) grouped by partno is your reliable QOH</td>
+          </tr>
+          <tr>
+            <td><span class="mono">partmaster.qoh_cache</span></td>
+            <td>Cached quantity on hand on partmaster</td>
+            <td><span class="mono">qoh_cache</span></td>
+            <td><span class="tag-warn">avoid</span> — lags behind real inventory, often stale</td>
+          </tr>
+          <tr>
+            <td><span class="mono">part_pick_layers</span></td>
+            <td>Tracks which FIFO layers were picked for work orders</td>
+            <td><span class="mono">partno</span>, <span class="mono">wo_id</span>, <span class="mono">qty_picked</span></td>
+            <td>key join path for linking WOs to PO receipts via FIFO</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PURCHASING -->
+  <div class="section">
+    <div class="section-label">purchasing & POs</div>
+
+    <p style="font-size:14px; color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">Purchase orders, line items, and receipts. Vendor 712 is excluded from most procurement reports — don't ask why, just always add that filter.</p>
+
+    <div class="callout warn">
+      <strong>always exclude vendor 712</strong> from any procurement or spend analysis. add <span class="mono">WHERE vendor_id != 712</span> to any PO query.
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Table</th><th>What It Is</th><th>Key Columns</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="mono">po</span></td>
+            <td>Purchase order header</td>
+            <td><span class="mono">id</span>, <span class="mono">vendor_id</span>, <span class="mono">po_date</span>, <span class="mono">status</span></td>
+            <td><span class="tag-info">core table</span> — one row per PO</td>
+          </tr>
+          <tr>
+            <td><span class="mono">po_line</span></td>
+            <td>Line items on each PO</td>
+            <td><span class="mono">po_id</span>, <span class="mono">partno</span>, <span class="mono">qty_ordered</span>, <span class="mono">unit_price</span></td>
+            <td>join to <span class="mono">po</span> on <span class="mono">po_id</span></td>
+          </tr>
+          <tr>
+            <td><span class="mono">po_line_receipts</span></td>
+            <td>Records when PO lines were received into inventory</td>
+            <td><span class="mono">po_line_id</span>, <span class="mono">qty_received</span>, <span class="mono">receipt_date</span></td>
+            <td>key for on-time delivery analysis and WO-to-PO linking via FIFO path</td>
+          </tr>
+          <tr>
+            <td><span class="mono">vendor</span></td>
+            <td>Vendor master list</td>
+            <td><span class="mono">id</span>, <span class="mono">name</span>, <span class="mono">lead_time</span></td>
+            <td>join on <span class="mono">vendor_id</span> — always exclude id=712</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- WORK ORDERS -->
+  <div class="section">
+    <div class="section-label">work orders & production</div>
+
+    <p style="font-size:14px; color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">Work orders drive production. Linking a work order all the way back to the POs that supplied its materials is one of the hardest join paths in this database — Cetec hasn't given us a clean answer on it yet.</p>
+
+    <div class="callout">
+      <strong>known blocker:</strong> there's no direct FK from work orders to POs. the best join path we've found goes through <span class="mono">part_pick_layers → po_line_receipts</span> via the FIFO inventory trail. this is still being worked out — documenting what you find is part of your project.
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Table</th><th>What It Is</th><th>Key Columns</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="mono">wo</span></td>
+            <td>Work order header</td>
+            <td><span class="mono">id</span>, <span class="mono">partno</span>, <span class="mono">status</span>, <span class="mono">open_date</span>, <span class="mono">due_date</span></td>
+            <td><span class="tag-info">core table</span> — one row per work order</td>
+          </tr>
+          <tr>
+            <td><span class="mono">wo_line</span></td>
+            <td>BOM components needed for each work order</td>
+            <td><span class="mono">wo_id</span>, <span class="mono">partno</span>, <span class="mono">qty_required</span></td>
+            <td>what materials are needed to build the WO</td>
+          </tr>
+          <tr>
+            <td><span class="mono">wo_labor</span></td>
+            <td>Labor entries logged against work orders</td>
+            <td><span class="mono">wo_id</span>, <span class="mono">employee_id</span>, <span class="mono">hours</span>, <span class="mono">labor_date</span></td>
+            <td>needed for OLE analysis — but Paylocity data not yet integrated</td>
+          </tr>
+          <tr>
+            <td><span class="mono">part_pick_layers</span></td>
+            <td>Tracks which inventory layers were consumed by a WO</td>
+            <td><span class="mono">wo_id</span>, <span class="mono">partno</span>, <span class="mono">fifo_layer_id</span></td>
+            <td>the bridge table for WO → PO tracing via FIFO path</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- QUALITY -->
+  <div class="section">
+    <div class="section-label">quality</div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Table</th><th>What It Is</th><th>Key Columns</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="mono">discrepancy</span></td>
+            <td>Quality discrepancy / nonconformance records</td>
+            <td><span class="mono">id</span>, <span class="mono">wo_id</span>, <span class="mono">partno</span>, <span class="mono">type</span>, <span class="mono">disposition</span></td>
+            <td>used for COPQ (Cost of Poor Quality) scrap analysis</td>
+          </tr>
+          <tr>
+            <td><span class="mono">discrepancy_line</span></td>
+            <td>Line items on each discrepancy — specific defects</td>
+            <td><span class="mono">disc_id</span>, <span class="mono">defect_code</span>, <span class="mono">qty</span>, <span class="mono">scrap_value</span></td>
+            <td>join to <span class="mono">discrepancy</span> on <span class="mono">disc_id</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TO DOCUMENT -->
+  <div class="section">
+    <div class="section-label">tables to document — your job this summer</div>
+    <div class="callout navy">
+      these tables exist in the database but haven't been fully documented yet. part of your database audit project is to explore them, figure out what they do, and fill this in.
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Table</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">customer</span></td><td><span class="tag-warn">undocumented</span></td><td>add description here</td></tr>
+          <tr><td><span class="mono">sales_order</span></td><td><span class="tag-warn">undocumented</span></td><td>add description here</td></tr>
+          <tr><td><span class="mono">sales_order_line</span></td><td><span class="tag-warn">undocumented</span></td><td>add description here</td></tr>
+          <tr><td><span class="mono">bom</span></td><td><span class="tag-warn">undocumented</span></td><td>add description here</td></tr>
+          <tr><td><span class="mono">routing</span></td><td><span class="tag-warn">undocumented</span></td><td>add description here</td></tr>
+          <tr><td><span class="mono">employee</span></td><td><span class="tag-warn">undocumented</span></td><td>add description here</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer>KnightDataIntern-2026 · built by Aliya · questions? ping her on Teams 🚀</footer>
+
+</body>
+</html>
