@@ -18,12 +18,4 @@ Onboarding site for the Knight Aerospace Data Team summer internship (June–Aug
 3. Set source to **Deploy from a branch → main → / (root)**
 4. Your site will be live at `https://yourusername.github.io/KnightDataIntern-2026`
 
-## Editing
 
-All pages are plain HTML + one shared `style.css`. No build step, no frameworks, no dependencies. Just open a file and edit.
-
-To add content to the database guide (Theo's main task), edit `database.html` and fill in the "Tables to Document" section.
-
----
-
-Built by Aliya · Knight Aerospace Data Team · 2026
