@@ -10,10 +10,10 @@
 
 <nav>
   <div class="nav-brand">KnightDataIntern-2026</div>
-  <a href="index.html">🏠 Home</a>
-  <a href="database.html">🗄️ Database Guide</a>
-  <a href="metabase.html">📊 Metabase 101</a>
-  <a href="cetec.html" class="active">⚙️ Cetec ERP</a>
+  <a href="index.html">Home</a>
+  <a href="database.html">Database Guide</a>
+  <a href="metabase.html">Metabase Guide</a>
+  <a href="cetec.html" class="active">Cetec ERP</a>
 </nav>
 
 <div class="page">
@@ -21,34 +21,38 @@
   <div class="hero">
     <div class="hero-tag">Enterprise Resource Planning</div>
     <h1>cetec <em>ERP</em></h1>
-    <p>Cetec is the system Knight Aerospace uses to run operations — purchasing, inventory, production, quality, and more. understanding what it does (and where it falls short) is core to your project this summer.</p>
+    <p>Cetec is the system Knight Aerospace uses to run operations. This includes purchasing, inventory, production, quality, and more. Understanding what it does is core to understanding how hte company works.</p>
   </div>
 
   <div class="callout warn">
-    <strong>why this matters to you:</strong> your big project is evaluating whether Knight should stay on Cetec or switch to something better. this page gives you the context to understand what Cetec actually does, what it's supposed to do, and where it's failing us.
+    <strong>why this matters to you:</strong> one of your projects is evaluating whether Knight should stay on Cetec or switch to something better. This page helps give you the context to understand what Cetec actually does, what it's supposed to do, and where it's failing us.
   </div>
 
   <!-- WHAT IS AN ERP -->
   <div class="section">
     <div class="section-label">what is an ERP system</div>
-    <p style="font-size:14px; color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">ERP stands for Enterprise Resource Planning. it's basically one big software system that tries to connect all parts of a company — instead of having separate tools for purchasing, inventory, production, HR, and finance, an ERP puts it all in one place with one shared database.</p>
+    <p style="font-size:14px; color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">ERP stands for Enterprise Resource Planning. it's basically one big software system that tries to connect all parts of a company instead of having separate tools for purchasing, inventory, production, HR, and finance, an ERP puts it all in one place with one shared database.</p>
 
     <div class="card-grid">
       <div class="card">
-        <h3>📦 inventory</h3>
-        <p>Tracks parts on hand, bin locations, and stock movements in and out</p>
+        <h3>Sales</h3>
+        <p>Manages customers, their orders from quotes to creation, invoicing and forecasts</p>
       </div>
       <div class="card">
-        <h3>🛒 purchasing</h3>
-        <p>Manages purchase orders from creation through receipt and payment</p>
+        <h3>Parts</h3>
+        <p>Manages all parts, including vendor returns</p>
       </div>
       <div class="card">
-        <h3>🏭 production</h3>
+        <h3>Purchasing</h3>
+        <p>Manages purchase orders from Quotes to creation through receipt and payment</p>
+      </div>
+      <div class="card">
+        <h3>Warehouse</h3>
+        <p>Tracks received orders/parts and when their released to production </p>
+      </div>
+      <div class="card">
+        <h3>Production</h3>
         <p>Work orders, routing, labor tracking, and shop floor scheduling</p>
-      </div>
-      <div class="card">
-        <h3>✅ quality</h3>
-        <p>Nonconformance reports, discrepancies, scrap tracking</p>
       </div>
     </div>
   </div>
@@ -56,23 +60,23 @@
   <!-- HOW CETEC FITS -->
   <div class="section">
     <div class="section-label">how cetec fits at knight aerospace</div>
-    <p style="font-size:14px; color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">Knight Aerospace uses Cetec as its main ERP. it's a cloud-based, manufacturing-focused system designed for small to mid-size shops. here's how data flows through it:</p>
+    <p style="font-size:14px; color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">Knight Aerospace uses Cetec as its main ERP. it's a cloud based system designed for small to mid-size manufacturing companies. here's how data flows through it:</p>
 
     <div class="flow">
-      <div class="flow-box">Customer Order</div>
+      <div class="flow-box">Customer Qoute</div>
       <div class="flow-arrow">→</div>
       <div class="flow-box accent">Work Order</div>
       <div class="flow-arrow">→</div>
       <div class="flow-box">Purchase Orders</div>
       <div class="flow-arrow">→</div>
-      <div class="flow-box gold">Inventory Receipt</div>
+      <div class="flow-box gold">Inventory</div>
       <div class="flow-arrow">→</div>
       <div class="flow-box accent">Production</div>
       <div class="flow-arrow">→</div>
       <div class="flow-box">Shipment</div>
     </div>
 
-    <p style="font-size:13px; color:var(--text-muted); margin-top:0.75rem; line-height:1.6;">every step above lives in Cetec's MySQL database. Metabase connects to that database and lets us build reports across all of it — in theory. in practice, some of those connections are broken or unclear.</p>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:0.75rem; line-height:1.6;">every step above lives in Cetec's MySQL database. Metabase connects to that database and lets us build reports across all of it (well not all the time). in practice, some of those connections are broken or unclear.</p>
   </div>
 
   <!-- HOW WE USE IT -->
@@ -82,11 +86,10 @@
       <table class="data-table">
         <thead><tr><th>Department</th><th>What They Use Cetec For</th></tr></thead>
         <tbody>
-          <tr><td><strong>Procurement</strong></td><td>Creating and tracking purchase orders, vendor management, receiving parts</td></tr>
           <tr><td><strong>Production</strong></td><td>Opening work orders, tracking labor, managing routing and shop floor</td></tr>
           <tr><td><strong>Inventory</strong></td><td>Tracking parts on hand, bin locations, stock movements</td></tr>
           <tr><td><strong>Quality</strong></td><td>Logging discrepancies, managing nonconformances, tracking scrap</td></tr>
-          <tr><td><strong>Data team (us)</strong></td><td>We don't use the Cetec UI much — we query its MySQL database through Metabase to build reports for everyone else</td></tr>
+          <tr><td><strong>Data team (us)</strong></td><td>We don't use the Cetec UI much. We query its MySQL database through Metabase to build reports for everyone else</td></tr>
         </tbody>
       </table>
     </div>
@@ -98,7 +101,7 @@
     <p style="font-size:14px; color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">this is the honest list of what's not working. part of your job is to expand this list by talking to departments and documenting what they're experiencing.</p>
 
     <div class="callout warn" style="margin-bottom: 0.75rem;">
-      <strong>these are known issues — not your fault if you hit them.</strong> document everything you find and bring it to Aliya.
+      <strong>these are known issues.</strong> if you run into another one, document it or ask
     </div>
 
     <div class="table-wrap">
@@ -107,18 +110,18 @@
         <tbody>
           <tr>
             <td><strong>No direct WO → PO link</strong></td>
-            <td>Can't easily trace what materials went into a work order or what POs supplied them</td>
-            <td><span class="tag-warn">blocked — Cetec hasn't helped</span></td>
+            <td>We can't easily trace what materials went into a work order or what POs supplied them</td>
+            <td><span class="tag-warn">blocked </span> Cetec hasn't helped</td>
           </tr>
           <tr>
             <td><strong>Data quality issues</strong></td>
             <td>Nulls, incorrect values, and stale cached fields across multiple tables</td>
-            <td><span class="tag-warn">ongoing — being documented</span></td>
+            <td><span class="tag-warn">ongoing </span> being documented</td>
           </tr>
           <tr>
             <td><strong>No Paylocity integration</strong></td>
-            <td>Can't connect HR/payroll data to work orders — blocks OLE analysis</td>
-            <td><span class="tag-warn">blocked — not enough mutual users</span></td>
+            <td>We can't connect HR/payroll data to work orders. This blocks OLE analysis</td>
+            <td><span class="tag-warn">blocked </spannot> enough mutual users</td>
           </tr>
           <tr>
             <td><strong>Limited support responsiveness</strong></td>
@@ -127,8 +130,8 @@
           </tr>
           <tr>
             <td><strong>Department pain points</strong></td>
-            <td>Each team has their own frustrations — not yet fully documented</td>
-            <td><span class="tag-info">your job to find out</span></td>
+            <td>Each team has their own frustrations, not yet fully documented</td>
+            <td><span class="tag-info">your job to find out!</span></td>
           </tr>
         </tbody>
       </table>
@@ -139,11 +142,11 @@
   <div class="section">
     <div class="section-label">your project in this context</div>
     <div class="card card-accent">
-      <h3>🎯 what you're building toward</h3>
-      <p>by the end of the summer, you'll have talked to every department, documented what's broken, researched what a better ERP would look like, and built a recommendation for leadership. the goal isn't just to complain about Cetec — it's to show Bianca (our CEO) exactly what the problems are costing us and what the path forward looks like.</p>
+                                                                                                                                                                                                                                                                           <h3>what you're building toward</h3>
+      <p>by the end of the summer, you should have gathered ingights from every department, documented what's broken with Cetec, researched what a better ERP would look like, and built a recommendation sildedeck/ presentation. the goal is to show Bianca (our CEO) exactly what the problems are costing us and what the path forward looks like.</p>
     </div>
-    <div class="callout" style="margin-top:0.75rem;">
-      <strong>remember:</strong> we don't say "it can't be done." we say "here's the problem and here's what we're doing about it." your recommendation deck is the "what we're doing about it."
+    <div class="callout warn" style="margin-top:0.75rem;">
+      <strong>key thing to check for each:</strong> does it integrate with Paylocity? that's one of our biggest blockers with Cetec right now.
     </div>
   </div>
 
@@ -163,14 +166,7 @@
         </tbody>
       </table>
     </div>
-    <div class="callout warn" style="margin-top:0.75rem;">
-      <strong>key thing to check for each:</strong> does it integrate with Paylocity? that's one of our biggest blockers with Cetec right now.
-    </div>
   </div>
-
 </div>
-
-<footer>KnightDataIntern-2026 · built by Aliya · questions? ping her on Teams 🚀</footer>
-
 </body>
 </html>
