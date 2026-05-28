@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Knight Data Intern 2026 · Metabase 101</title>
+  <title>Knight Data Intern 2026 · Metabase GuideSA  Q`</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <nav>
   <div class="nav-brand">KnightDataIntern-2026</div>
-  <a href="index.html">🏠 Home</a>
-  <a href="database.html">🗄️ Database Guide</a>
-  <a href="metabase.html" class="active">📊 Metabase 101</a>
-  <a href="cetec.html">⚙️ Cetec ERP</a>
+  <a href="index.html">Home</a>
+  <a href="database.html">Database Guide</a>
+  <a href="metabase.html" class="active">Metabase 101</a>
+  <a href="cetec.html">Cetec ERP</a>
 </nav>
 
 <div class="page">
@@ -21,7 +21,7 @@
   <div class="hero">
     <div class="hero-tag">Reporting & Dashboards</div>
     <h1>metabase <em>101</em></h1>
-    <p>Metabase is where we build every report and dashboard for Knight Aerospace departments. it connects directly to the Cetec MySQL database — so anything you can query in SQL, you can visualize here.</p>
+    <p>Metabase is where we build every report and dashboard for Knight Aerospace departments. it connects directly to the Cetec MySQL database. So anything you can query in SQL, you can visualize here.</p>
   </div>
 
   <!-- WHAT IS IT -->
@@ -29,20 +29,20 @@
     <div class="section-label">what is metabase</div>
     <div class="card-grid">
       <div class="card">
-        <h3>📝 SQL editor</h3>
-        <p>Write raw MySQL queries and see results instantly — this is how we build most of our reports</p>
+        <h3>SQL editor</h3>
+        <p>Write GUI or raw MySQL queries and visualize them all in the application. This is how we build most of our reports</p>
       </div>
       <div class="card">
-        <h3>📊 visualizations</h3>
+        <h3>Visualizations</h3>
         <p>Turn query results into bar charts, line graphs, tables, numbers, and more</p>
       </div>
       <div class="card">
-        <h3>📋 dashboards</h3>
-        <p>Combine multiple charts into one page — each department has their own dashboard</p>
+        <h3>Dashboards</h3>
+        <p>Combine multiple charts/reports into one page. (We should probably organize reports based on department)</p>
       </div>
       <div class="card">
-        <h3>🔍 filters</h3>
-        <p>Add date pickers, dropdowns, and text inputs so users can filter reports without touching SQL</p>
+        <h3>Filters</h3>
+        <p>Add date pickers, dropdowns, and text inputs so users can filter reports without touching the code</p>
       </div>
     </div>
   </div>
@@ -55,10 +55,11 @@
         <thead><tr><th>Where</th><th>What It Is</th></tr></thead>
         <tbody>
           <tr><td><strong>Home</strong></td><td>Recently viewed items and pinned dashboards</td></tr>
-          <tr><td><strong>Browse → Our Analytics</strong></td><td>Shared collections — all team reports live here</td></tr>
-          <tr><td><strong>Your personal collection</strong></td><td>Your own sandbox — save drafts and work-in-progress here before moving to shared</td></tr>
-          <tr><td><strong>New → SQL query</strong></td><td>Opens the SQL editor — this is where you'll spend most of your time</td></tr>
-          <tr><td><strong>New → Dashboard</strong></td><td>Create a new dashboard to combine multiple questions</td></tr>
+          <tr><td><strong>Top left dashes → Our Analytics</strong></td><td>Shared collections. All team reports live here</td></tr>
+          <tr><td><strong>Your personal collection</strong></td><td>Your own private collection. You can save drafts and work-in-progress here before moving to shared</td></tr>
+          <tr><td><strong>+ New → SQL question</strong></td><td>This is a No-code query builder. This is where you can have</td></tr>
+          <tr><td><strong>+ New → SQL query</strong></td><td>Opens the SQL editor. This is where you'll spend most of your time</td></tr>
+          <tr><td><strong>+ New → Dashboard</strong></td><td>Create a new dashboard to combine multiple questions</td></tr>
         </tbody>
       </table>
     </div>
@@ -67,14 +68,14 @@
   <!-- WRITING A QUESTION -->
   <div class="section">
     <div class="section-label">writing a SQL question</div>
-    <p style="font-size:14px; color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">In Metabase, a "question" is just a saved SQL query with a visualization attached. here's the basic workflow:</p>
+    <p style="font-size:14px; color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">In Metabase, a "question" is just a saved SQL query with a visualization attached. Basically the no-code query builder. Here's the basic workflow:</p>
 
     <div class="table-wrap">
       <table class="data-table">
         <thead><tr><th>Step</th><th>What to Do</th></tr></thead>
         <tbody>
           <tr><td><span class="mono">01</span></td><td>Click <strong>New → SQL query</strong> and make sure the database is set to <strong>Cetec</strong></td></tr>
-          <tr><td><span class="mono">02</span></td><td>Write your query in the editor — use CTEs to keep it readable</td></tr>
+          <tr><td><span class="mono">02</span></td><td>Write your query in the editor</td></tr>
           <tr><td><span class="mono">03</span></td><td>Hit <strong>Run</strong> (or Ctrl+Enter) to see results</td></tr>
           <tr><td><span class="mono">04</span></td><td>Click the <strong>Visualization</strong> button at the bottom to pick a chart type</td></tr>
           <tr><td><span class="mono">05</span></td><td>Click <strong>Save</strong>, give it a clear name, and save to your personal collection first</td></tr>
@@ -90,7 +91,7 @@
     <p style="font-size:14px; color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">Metabase has a special syntax for adding interactive filters to SQL queries. this lets users filter reports without editing SQL.</p>
 
     <div class="callout">
-      <strong>optional filter syntax:</strong> wrap a filter in <span class="mono">[[ ]]</span> double brackets to make it optional — if the user doesn't set it, the filter is ignored and all rows return.
+      <strong>optional filter syntax:</strong> wrap a filter in <span class="mono">[[ ]]</span> double brackets to make it optional so that if the user doesn't set it, the filter is ignored and all rows return.
     </div>
 
     <div class="table-wrap">
@@ -99,12 +100,12 @@
         <tbody>
           <tr>
             <td><span class="mono">{{variable}}</span></td>
-            <td>Required filter — always applied</td>
+            <td>Required filter, always applied</td>
             <td><span class="mono">WHERE vendor_id = {{vendor}}</span></td>
           </tr>
           <tr>
             <td><span class="mono">[[AND col = {{var}}]]</span></td>
-            <td>Optional filter — ignored if not set</td>
+            <td>Optional filter, ignored if not set</td>
             <td><span class="mono">[[AND partno = {{part}}]]</span></td>
           </tr>
           <tr>
@@ -117,48 +118,37 @@
     </div>
   </div>
 
-  <!-- VISUALIZATION TYPES -->
-  <div class="section">
-    <div class="section-label">visualization types & when to use them</div>
-    <div class="table-wrap">
-      <table class="data-table">
-        <thead><tr><th>Chart Type</th><th>Best For</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Table</strong></td><td>Detailed row-level data, reference reports, anything with many columns</td></tr>
-          <tr><td><strong>Bar chart</strong></td><td>Comparing values across categories (spend by vendor, defects by part)</td></tr>
-          <tr><td><strong>Line chart</strong></td><td>Trends over time (monthly spend, weekly scrap rates)</td></tr>
-          <tr><td><strong>Single number</strong></td><td>KPIs — one big stat on a dashboard (total open POs, on-time %)</td></tr>
-          <tr><td><strong>Row chart</strong></td><td>Rankings — like a bar chart but horizontal, great for long category names</td></tr>
-          <tr><td><strong>Pivot table</strong></td><td>Cross-tab summaries — rows and columns both grouping data</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 
   <!-- TIPS -->
   <div class="section">
-    <div class="section-label">tips from Aliya</div>
+    <div class="section-label">Tips</div>
     <div class="card" style="margin-bottom:0.75rem;">
       <h3>save early, save often</h3>
-      <p>Metabase doesn't autosave. if you close the tab mid-query, it's gone. save drafts to your personal collection constantly.</p>
+      <p>Metabase doesn't autosave. So, if you close the tab mid-query, it's gone. Save drafts to your personal collection constantly.</p>
     </div>
     <div class="card" style="margin-bottom:0.75rem;">
       <h3>use CTEs, not subqueries</h3>
-      <p>Metabase renders CTEs cleanly and they're way easier to debug. if your query has more than 2 joins, it probably needs a CTE.</p>
+      <p>Metabase renders CTEs cleanly and they're way easier to debug. They are a temporary, named result set defined within a query using the WITH keyword. If your query has more than 2 joins, it probably needs a CTE. <br>
+      For example: <span class="mono"> <br>
+      WITH cte_name AS ( <br>
+      &ensp;SELECT <br>
+      &ensp;FROM <br>
+      &ensp;WHERE <br>
+      ) <br>
+      SELECT * <br>
+      FROM cte_name;</span>.</p>
     </div>
     <div class="card" style="margin-bottom:0.75rem;">
       <h3>check your JOINs</h3>
-      <p>A wrong JOIN in Metabase doesn't error — it just returns wrong numbers silently. always sanity check row counts after adding a join.</p>
+      <p>A wrong JOIN doesn't error, it just returns wrong numbers. So, always sanity check the row counts after adding a join.</p>
     </div>
     <div class="card">
       <h3>naming convention</h3>
-      <p>Name questions like: <span class="mono">[Team] — Report Name — Date</span>. Example: <span class="mono">Procurement — Vendor OTD — 2026</span>. Makes searching way easier.</p>
+      <p>Try naming questions like: <span class="mono">[Team] — Report Name — Date</span>. Example: <span class="mono">Procurement — Vendor OTD — 2026</span>. Makes searching way easier. (I w</p>
     </div>
   </div>
 
 </div>
-
-<footer>KnightDataIntern-2026 · built by Aliya · questions? ping her on Teams 🚀</footer>
 
 </body>
 </html>
